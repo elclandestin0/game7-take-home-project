@@ -1,4 +1,6 @@
 import { Box } from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
 const GameCard = () => {
   return (
@@ -9,8 +11,14 @@ const GameCard = () => {
       bg="blue"
       height="100px"
       width="100px"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
       _hover={{ opacity: 0.6, cursor: "pointer" }}
-    ></Box>
+    >
+      <FontAwesomeIcon icon={faCoffee} size="2x"
+       />
+    </Box>
   );
 };
 

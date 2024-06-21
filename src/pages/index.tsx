@@ -6,6 +6,7 @@ import styles from "@/styles/Home.module.css";
 import { Flex, Text } from "@chakra-ui/react";
 import  GameBoard  from "@/components/GameBoard";
 
+
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
         <Flex className={styles.main} height="100vh" p={10}>
-          <Text fontSize="6xl">Memory Cards Game by Memo Khoury</Text>
+          <Text fontSize="5xl">Memory Cards Game by Memo Khoury</Text>
           <GameBoard />
         </Flex>
       </main>
