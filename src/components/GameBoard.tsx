@@ -40,8 +40,17 @@ const GameBoard = () => {
   }, [level]);
 
   const handleCardClick = (index: number) => {
-    console.log("handle card clicked ", index);
-    console.log("identifier is: ", cards[index].identifier);
+    const newCards = [...cards];
+    newCards[index].revealed = true;
+    setCards(newCards);
+    console.log(cards);
+    const cardsRevealed = revealedCards;
+    cardsRevealed.push(cards[index].identifier)
+    setRevealedCards(cardsRevealed);
+    if (cardsRevealed.length > 2) {
+        setRevealedCards([]);
+    }
+    console.log(revealedCards);
   };
 
   return (
@@ -55,7 +64,7 @@ const GameBoard = () => {
         <GameCard
           key={card.id}
           icon={card.icon}
-          revealed={false}
+          revealed={card.revealed}
           click={() => handleCardClick(index)}
         />
       ))}

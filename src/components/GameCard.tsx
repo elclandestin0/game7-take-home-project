@@ -14,7 +14,7 @@ const GameCard = ({icon, revealed, click}) => {
       justifyContent="center"
       _hover={{ opacity: 0.6, cursor: "pointer" }}
     >
-      {<FontAwesomeIcon icon={icon} size="2x" /> }
+      {revealed ? <FontAwesomeIcon icon={icon} size="2x" /> : ""}
     </Box>
   );
 };
