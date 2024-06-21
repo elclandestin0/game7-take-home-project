@@ -7,6 +7,7 @@ const GameBoard = () => {
   const [level, setLevel] = useState({ row: 5, column: 6 });
   const [cards, setCards] = useState([]);
   const [revealedCards, setRevealedCards] = useState([]);
+  const [disableClicks, setDisabledClicks] = useState(false);
 
   useEffect(() => {
     const totalCards = level.row * level.column;
@@ -40,24 +41,31 @@ const GameBoard = () => {
   }, [level]);
 
   const handleCardClick = (index: number) => {
+    if (disableClicks || cards[index].isRevealed) return;
     const newCards = [...cards];
     newCards[index].revealed = true;
     setCards(newCards);
     
     const newRevealedCards = [...revealedCards, index]; 
+    console.log(newRevealedCards);
     setRevealedCards(newRevealedCards);
 
-    // Set a timer for 1 second if the cards aren't equal to each other.
+    // Set a timer for 1 second if the cards aren't equal to each other then make the unequal to each other
     if (newRevealedCards.length === 2) {
-        console.log("checking if cards are equal")
+        setDisabledClicks(true);
         const [firstIndex, secondIndex] = newRevealedCards;
         if (newCards[firstIndex].identifier !== newCards[secondIndex].identifier) {
           setTimeout(() => {
             newCards[firstIndex].isRevealed = false;
             newCards[secondIndex].isRevealed = false;
             setCards(newCards);
+            setRevealedCards([]);
+            setDisabledClicks(false);
           }, 1000);
         }
+      } else {
+        setRevealedCards([]);
+        setDisabledClicks(false);
       }
     console.log(revealedCards);
   };
