@@ -36,10 +36,13 @@ const GameBoard = () => {
     // greater than half the # of icons, then slice from random index backwards to the
     // amount of totalCards/2
     const randomIndex = Math.floor(Math.random() * 70);
+
+
+    const shuffledIcons = icons.sort(() => Math.random());
     const selectedIcons =
-      randomIndex < 35
-        ? icons.slice(randomIndex, randomIndex + totalCards / 2)
-        : icons.slice(-randomIndex, totalCards / 2 - randomIndex);
+    randomIndex < icons.length / 2
+      ? shuffledIcons.slice(randomIndex, randomIndex + totalCards / 2)
+      : shuffledIcons.slice(-randomIndex, (totalCards / 2) - randomIndex);
 
     const selectedCards = selectedIcons.map((icon, index) => ({
       icon,
@@ -47,9 +50,8 @@ const GameBoard = () => {
     }));
 
     // Concatenaate arrays, then shuffle. The higher the number the easier it is
-    const shuffledCards = [...selectedCards, ...selectedCards].sort(
-      () => Math.random() - 0.2
-    );
+    const shuffledCards = [...selectedCards, ...selectedCards].sort(()=> Math.random());
+
     const newCards = shuffledCards.map((card, index) => ({
       id: index,
       icon: card.icon,
