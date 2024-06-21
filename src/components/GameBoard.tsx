@@ -43,13 +43,22 @@ const GameBoard = () => {
     const newCards = [...cards];
     newCards[index].revealed = true;
     setCards(newCards);
-    console.log(cards);
-    const cardsRevealed = revealedCards;
-    cardsRevealed.push(cards[index].identifier)
-    setRevealedCards(cardsRevealed);
-    if (cardsRevealed.length > 2) {
-        setRevealedCards([]);
-    }
+    
+    const newRevealedCards = [...revealedCards, index]; 
+    setRevealedCards(newRevealedCards);
+
+    // Set a timer for 1 second if the cards aren't equal to each other.
+    if (newRevealedCards.length === 2) {
+        console.log("checking if cards are equal")
+        const [firstIndex, secondIndex] = newRevealedCards;
+        if (newCards[firstIndex].identifier !== newCards[secondIndex].identifier) {
+          setTimeout(() => {
+            newCards[firstIndex].isRevealed = false;
+            newCards[secondIndex].isRevealed = false;
+            setCards(newCards);
+          }, 1000);
+        }
+      }
     console.log(revealedCards);
   };
 
