@@ -19,11 +19,12 @@ const GameBoard = () => {
         ? icons.slice(randomIndex, randomIndex + totalCards / 2)
         : icons.slice(-randomIndex, (totalCards / 2) - randomIndex);
 
-    // Shuffling based 
+    // Concatenaate arrays, then shuffle. The higher the number the easier it is 
     const shuffledCards = [...selectedIcons, ...selectedIcons].sort(() => Math.random() - 0.2);
     const newCards = shuffledCards.map((icon, index) => ({
       id: index,
       icon,
+      revealed: false
     }));
 
     setCards(newCards);
@@ -37,7 +38,7 @@ const GameBoard = () => {
       spacingY="20px"
     >
       {cards.map((card, index) => (
-        <GameCard key={card.id} icon={card.icon} />
+        <GameCard key={card.id} icon={card.icon} revealed={false} />
       ))}
     </SimpleGrid>
   );
