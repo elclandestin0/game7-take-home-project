@@ -27,6 +27,7 @@ const GameBoard = () => {
   const [disableClicks, setDisableClicks] = useState(false);
   const [mistakes, setMistakes] = useState(0);
   const [moves, setMoves] = useState(0);
+  const [hasWon, setHasWon] = useState(false);
 
   useEffect(() => {
     const totalCards = level.row * level.column;
@@ -40,13 +41,13 @@ const GameBoard = () => {
         ? icons.slice(randomIndex, randomIndex + totalCards / 2)
         : icons.slice(-randomIndex, totalCards / 2 - randomIndex);
 
-    const pairedIcons = selectedIcons.map((icon, index) => ({
+    const selectedCards = selectedIcons.map((icon, index) => ({
       icon,
       identifier: index,
     }));
 
     // Concatenaate arrays, then shuffle. The higher the number the easier it is
-    const shuffledCards = [...pairedIcons, ...pairedIcons].sort(
+    const shuffledCards = [...selectedCards, ...selectedCards].sort(
       () => Math.random() - 0.2
     );
     const newCards = shuffledCards.map((card, index) => ({
@@ -57,6 +58,8 @@ const GameBoard = () => {
     }));
 
     setCards(newCards);
+    setHasWon(false);
+    setRevealedCards([]);
   }, [level]);
 
   const handleCardClick = (index: number) => {
@@ -89,6 +92,10 @@ const GameBoard = () => {
       }
       setMoves(moves + 1);
     }
+
+    if (cards.every((card) => card.revealed)) {
+      setHasWon(true);
+    }
   };
 
   return (
@@ -100,10 +107,10 @@ const GameBoard = () => {
         <Tag size="lg" variant="solid" colorScheme="teal">
           Moves: {moves}
         </Tag>
-        <Tag size="lg" variant="solid" colorScheme="teal">
-          Timer:
-        </Tag>
       </HStack>
+      <Text fontSize="2xl" color={hasWon ? "green" : "orange"}>
+        {hasWon ? "You win!" : "You got this!"}
+      </Text>
       <SimpleGrid
         columns={level.column}
         row={level.row}
