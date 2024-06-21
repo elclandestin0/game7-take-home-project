@@ -4,7 +4,7 @@ import GameCard from "./GameCard";
 import { icons } from "@/utils/icons";
 
 const GameBoard = () => {
-  const [level, setLevel] = useState({ row: 5, column: 6 });
+  const [level, setLevel] = useState({ row: 3, column: 4 });
   const [cards, setCards] = useState([]);
   const [revealedCards, setRevealedCards] = useState([]);
   const [disableClicks, setDisableClicks] = useState(false);
@@ -21,15 +21,15 @@ const GameBoard = () => {
         ? icons.slice(randomIndex, randomIndex + totalCards / 2)
         : icons.slice(-randomIndex, totalCards / 2 - randomIndex);
 
-    const pairedIcons = selectedIcons.map(
-      (icon, index) => ({
-        icon,
-        identifier: index,
-      })
-    );
+    const pairedIcons = selectedIcons.map((icon, index) => ({
+      icon,
+      identifier: index,
+    }));
 
     // Concatenaate arrays, then shuffle. The higher the number the easier it is
-    const shuffledCards = [...pairedIcons, ...pairedIcons].sort(() => Math.random() - 0.2);
+    const shuffledCards = [...pairedIcons, ...pairedIcons].sort(
+      () => Math.random() - 0.2
+    );
     const newCards = shuffledCards.map((card, index) => ({
       id: index,
       icon: card.icon,
@@ -45,28 +45,29 @@ const GameBoard = () => {
     const newCards = [...cards];
     newCards[index].revealed = true;
     setCards(newCards);
-    
-    const newRevealedCards = [...revealedCards, index]; 
+
+    const newRevealedCards = [...revealedCards, index];
     console.log(newRevealedCards);
     setRevealedCards(newRevealedCards);
-
     // Set a timer for 1 second if the cards aren't equal to each other then make the unequal to each other
     if (newRevealedCards.length === 2) {
-        setDisableClicks(true);
-        const [firstIndex, secondIndex] = newRevealedCards;
-        if (newCards[firstIndex].identifier !== newCards[secondIndex].identifier) {
-          setTimeout(() => {
-            newCards[firstIndex].revealed = false;
-            newCards[secondIndex].revealed = false;
-            console.log(newCards);
-            setCards(newCards);
-            setRevealedCards([]);
-            setDisableClicks(false);
-          }, 1000);
-        } else {
-            setRevealedCards(newRevealedCards);
-        }
+      setDisableClicks(true);
+      const [firstIndex, secondIndex] = newRevealedCards;
+      if (
+        newCards[firstIndex].identifier !== newCards[secondIndex].identifier
+      ) {
+        setTimeout(() => {
+          newCards[firstIndex].revealed = false;
+          newCards[secondIndex].revealed = false;
+          setCards(newCards);
+          setRevealedCards([]);
+          setDisableClicks(false);
+        }, 1000);
+      } else {
+        setRevealedCards([]);
+        setDisableClicks(false);
       }
+    }
   };
 
   return (
