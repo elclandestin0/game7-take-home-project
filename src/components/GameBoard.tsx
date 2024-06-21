@@ -12,14 +12,14 @@ const GameBoard = () => {
       newCards.push(<Box bg="tomato" height="150px" width="100px"></Box>);
       console.log("pushed a card");
     }
-    setCards(cards);
+    setCards(newCards);
   }, [level]);
 
   return (
     <SimpleGrid
       columns={level.column}
       row={level.row}
-      spacingX="80px"
+      spacingX="20px"
       spacingY="20px"
     >
       {cards}
