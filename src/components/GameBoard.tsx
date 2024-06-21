@@ -31,26 +31,24 @@ const GameBoard = () => {
 
   useEffect(() => {
     const totalCards = level.row * level.column;
-
+    const numberOfIcons = totalCards / 2;
     // Modifying the icons selector a bit. Take a random index. If it's
     // greater than half the # of icons, then slice from random index backwards to the
     // amount of totalCards/2
-    const randomIndex = Math.floor(Math.random() * 70);
-
-
-    const shuffledIcons = icons.sort(() => Math.random());
+    const randomIndex = Math.floor(Math.random() * icons.length);
+    const shuffledIcons = icons.sort(() => Math.random() - 0.5);
     const selectedIcons =
     randomIndex < icons.length / 2
-      ? shuffledIcons.slice(randomIndex, randomIndex + totalCards / 2)
-      : shuffledIcons.slice(-randomIndex, (totalCards / 2) - randomIndex);
+      ? shuffledIcons.slice(randomIndex, randomIndex + numberOfIcons)
+      : shuffledIcons.slice(-randomIndex, numberOfIcons - randomIndex);
 
     const selectedCards = selectedIcons.map((icon, index) => ({
       icon,
       identifier: index,
     }));
 
-    // Concatenaate arrays, then shuffle. The higher the number the easier it is
-    const shuffledCards = [...selectedCards, ...selectedCards].sort(()=> Math.random());
+    // Concatenaate arrays, then shuffle. 
+    const shuffledCards = [...selectedCards, ...selectedCards].sort(() => Math.random() - 0.5);
 
     const newCards = shuffledCards.map((card, index) => ({
       id: index,
