@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
 
 import { Flex, Text } from "@chakra-ui/react";
+import  GameBoard  from "@/components/GameBoard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,14 +18,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <Flex
-          className={styles.main}
-          height="100vh"
-          alignItems="center"
-          justifyContent="center"
-          p={10}
-        >
-           <Text fontSize='6xl'>Memory Cards Game by Memo Khoury</Text>
+        <Flex className={styles.main} height="100vh" p={10}>
+          <Text fontSize="6xl">Memory Cards Game by Memo Khoury</Text>
+          <GameBoard />
         </Flex>
       </main>
     </>
