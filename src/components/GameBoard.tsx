@@ -1,5 +1,6 @@
 import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import GameCard from './GameCard';
 
 const GameBoard = () => {
   const [level, setLevel] = useState({ row: 5, column: 6 });
@@ -9,7 +10,7 @@ const GameBoard = () => {
     const totalCards = level.row * level.column;
     const newCards = [];
     for (let i = 0; i < totalCards; i++) {
-      newCards.push(<Box bg="blue" height="100px" width="100px"></Box>);
+      newCards.push(<GameCard/>);
       console.log("pushed a card");
     }
     setCards(newCards);
