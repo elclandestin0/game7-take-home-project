@@ -1,4 +1,12 @@
-import { Box, Button, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  SimpleGrid,
+  Tag,
+  Text,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { icons } from "@/utils/icons";
@@ -17,6 +25,8 @@ const GameBoard = () => {
   const [cards, setCards] = useState<Card[]>([]);
   const [revealedCards, setRevealedCards] = useState<number[]>([]);
   const [disableClicks, setDisableClicks] = useState(false);
+  const [mistakes, setMistakes] = useState(0);
+  const [moves, setMoves] = useState(0);
 
   useEffect(() => {
     const totalCards = level.row * level.column;
@@ -72,15 +82,28 @@ const GameBoard = () => {
           setRevealedCards([]);
           setDisableClicks(false);
         }, 1000);
+        setMistakes(mistakes + 1);
       } else {
         setRevealedCards([]);
         setDisableClicks(false);
       }
+      setMoves(moves + 1);
     }
   };
 
   return (
     <>
+      <HStack spacing={4}>
+        <Tag size="lg" variant="solid" colorScheme="teal">
+          Mistakes: {mistakes}
+        </Tag>
+        <Tag size="lg" variant="solid" colorScheme="teal">
+          Moves: {moves}
+        </Tag>
+        <Tag size="lg" variant="solid" colorScheme="teal">
+          Timer:
+        </Tag>
+      </HStack>
       <SimpleGrid
         columns={level.column}
         row={level.row}
@@ -97,17 +120,17 @@ const GameBoard = () => {
         ))}
       </SimpleGrid>
       <Flex>
-      {levelConfig.map((config, index) => (
-        <Button
-          key={index}
-          margin={4}
-          onClick={() => {
-            setLevel({ row: config.row, column: config.column });
-          }}
-        >
+        {levelConfig.map((config, index) => (
+          <Button
+            key={index}
+            margin={4}
+            onClick={() => {
+              setLevel({ row: config.row, column: config.column });
+            }}
+          >
             {config.row}x{config.column}
-        </Button>
-      ))}
+          </Button>
+        ))}
       </Flex>
     </>
   );
