@@ -11,22 +11,21 @@ const GameBoard = () => {
     const totalCards = level.row * level.column;
 
     // Modifying the icons selector a bit. Take a random index. If it's
-    // greater than half the # of icons, then slice from the index
+    // greater than half the # of icons, then slice from random index backwards to the
+    // amount of totalCards/2
     const randomIndex = Math.floor(Math.random() * 70);
     const selectedIcons =
       randomIndex < 35
         ? icons.slice(randomIndex, randomIndex + totalCards / 2)
         : icons.slice(-randomIndex, (totalCards / 2) - randomIndex);
-    
-    const newCards = selectedIcons.map((icon, index) => ({
+
+    // Shuffling based 
+    const shuffledCards = [...selectedIcons, ...selectedIcons].sort(() => Math.random() - 0.2);
+    const newCards = shuffledCards.map((icon, index) => ({
       id: index,
       icon,
     }));
 
-    // for (let i = 0; i < totalCards; i++) {
-    // //   newCards.push(<GameCard/>);
-    //   console.log("pushed a card");
-    // }
     setCards(newCards);
   }, [level]);
 
