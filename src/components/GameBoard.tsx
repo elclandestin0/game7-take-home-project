@@ -9,7 +9,15 @@ const GameBoard = () => {
 
   useEffect(() => {
     const totalCards = level.row * level.column;
-    const selectedIcons = icons.slice(0, totalCards / 2);
+
+    // Modifying the icons selector a bit. Take a random index. If it's
+    // greater than half the # of icons, then slice from the index
+    const randomIndex = Math.floor(Math.random() * 70);
+    const selectedIcons =
+      randomIndex < 35
+        ? icons.slice(randomIndex, randomIndex + totalCards / 2)
+        : icons.slice(-randomIndex, (totalCards / 2) - randomIndex);
+    
     const newCards = selectedIcons.map((icon, index) => ({
       id: index,
       icon,
@@ -30,10 +38,7 @@ const GameBoard = () => {
       spacingY="20px"
     >
       {cards.map((card, index) => (
-        <GameCard
-          key={card.id}
-          icon={card.icon}
-        />
+        <GameCard key={card.id} icon={card.icon} />
       ))}
     </SimpleGrid>
   );
