@@ -2,7 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 
-const GameCard = () => {
+const GameCard = ({icon}) => {
   return (
     <Box
       onClick={() => {
@@ -16,7 +16,7 @@ const GameCard = () => {
       justifyContent="center"
       _hover={{ opacity: 0.6, cursor: "pointer" }}
     >
-      <FontAwesomeIcon icon={faCoffee} size="2x" />
+      <FontAwesomeIcon icon={icon} size="2x" />
     </Box>
   );
 };
