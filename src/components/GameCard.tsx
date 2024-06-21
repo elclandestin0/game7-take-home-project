@@ -16,8 +16,7 @@ const GameCard = () => {
       justifyContent="center"
       _hover={{ opacity: 0.6, cursor: "pointer" }}
     >
-      <FontAwesomeIcon icon={faCoffee} size="2x"
-       />
+      <FontAwesomeIcon icon={faCoffee} size="2x" />
     </Box>
   );
 };
