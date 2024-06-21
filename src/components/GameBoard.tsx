@@ -9,7 +9,7 @@ const GameBoard = () => {
     const totalCards = level.row * level.column;
     const newCards = [];
     for (let i = 0; i < totalCards; i++) {
-      newCards.push(<Box bg="tomato" height="150px" width="100px"></Box>);
+      newCards.push(<Box bg="blue" height="100px" width="100px"></Box>);
       console.log("pushed a card");
     }
     setCards(newCards);
