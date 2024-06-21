@@ -1,14 +1,15 @@
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, SimpleGrid, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { icons } from "@/utils/icons";
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import { levelConfig } from "@/utils/levelConfig";
 
 interface Card {
-    id: number;
-    icon: IconDefinition,
-    identifier: number;
-    revealed: boolean;
+  id: number;
+  icon: IconDefinition;
+  identifier: number;
+  revealed: boolean;
 }
 
 const GameBoard = () => {
@@ -79,21 +80,36 @@ const GameBoard = () => {
   };
 
   return (
-    <SimpleGrid
-      columns={level.column}
-      row={level.row}
-      spacingX="20px"
-      spacingY="20px"
-    >
-      {cards.map((card, index) => (
-        <GameCard
-          key={card.id}
-          icon={card.icon}
-          revealed={card.revealed}
-          click={() => handleCardClick(index)}
-        />
+    <>
+      <SimpleGrid
+        columns={level.column}
+        row={level.row}
+        spacingX="20px"
+        spacingY="20px"
+      >
+        {cards.map((card, index) => (
+          <GameCard
+            key={card.id}
+            icon={card.icon}
+            revealed={card.revealed}
+            click={() => handleCardClick(index)}
+          />
+        ))}
+      </SimpleGrid>
+      <Flex>
+      {levelConfig.map((config, index) => (
+        <Button
+          key={index}
+          margin={4}
+          onClick={() => {
+            setLevel({ row: config.row, column: config.column });
+          }}
+        >
+            {config.row}x{config.column}
+        </Button>
       ))}
-    </SimpleGrid>
+      </Flex>
+    </>
   );
 };
 

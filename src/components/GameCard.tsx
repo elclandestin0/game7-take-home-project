@@ -21,7 +21,7 @@ const GameCard: React.FC<GameCardProps> = ({icon, revealed, click}) => {
       justifyContent="center"
       _hover={{ opacity: 0.6, cursor: "pointer" }}
     >
-      {revealed ? <FontAwesomeIcon icon={icon} size="2x" /> : ""}
+      {revealed ? <FontAwesomeIcon icon={icon} size="2x" color="white" /> : ""}
     </Box>
   );
 };
