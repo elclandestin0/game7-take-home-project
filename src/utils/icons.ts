@@ -68,6 +68,8 @@ import {
     faSnowboarding,
     faSeedling,
     faRunning,
+    faFaceAngry,
+    faFaceDizzy,
   } from '@fortawesome/free-solid-svg-icons';
   
   export const icons = [
@@ -139,5 +141,7 @@ import {
     faSnowboarding,
     faSeedling,
     faRunning,
+    faFaceAngry,
+    faFaceDizzy
   ];
   
