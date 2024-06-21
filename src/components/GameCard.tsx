@@ -1,8 +1,15 @@
 import { Box } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import { faCoffee, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
-const GameCard = ({icon, revealed, click}) => {
+interface GameCardProps {
+    icon: IconDefinition;
+    revealed: boolean;
+    click: () => void;
+  }
+
+
+const GameCard: React.FC<GameCardProps> = ({icon, revealed, click}) => {
   return (
     <Box
       onClick={click}

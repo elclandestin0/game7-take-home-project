@@ -2,11 +2,19 @@ import { Box, SimpleGrid, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import GameCard from "./GameCard";
 import { icons } from "@/utils/icons";
+import { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+
+interface Card {
+    id: number;
+    icon: IconDefinition,
+    identifier: number;
+    revealed: boolean;
+}
 
 const GameBoard = () => {
-  const [level, setLevel] = useState({ row: 3, column: 4 });
-  const [cards, setCards] = useState([]);
-  const [revealedCards, setRevealedCards] = useState([]);
+  const [level, setLevel] = useState({ row: 5, column: 4 });
+  const [cards, setCards] = useState<Card[]>([]);
+  const [revealedCards, setRevealedCards] = useState<number[]>([]);
   const [disableClicks, setDisableClicks] = useState(false);
 
   useEffect(() => {
