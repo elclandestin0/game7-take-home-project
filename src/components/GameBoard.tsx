@@ -60,6 +60,8 @@ const GameBoard = () => {
     setCards(newCards);
     setHasWon(false);
     setRevealedCards([]);
+    setMoves(0);
+    setMistakes(0);
   }, [level]);
 
   const handleCardClick = (index: number) => {
